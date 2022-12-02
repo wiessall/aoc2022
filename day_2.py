@@ -34,14 +34,50 @@ def score_round(_round: tuple) -> int:
     score += win_dic[elve + you]
     return score
 
-def score_game(path: str) -> int:
-    score_list = []
-    with open(path) as f:
-      for line in f.readlines():
-          _round = parse_line(line)
-          print(score_round(_round))
-          score_list.append(score_round(_round))
-    return sum(score_list)
+
+def play_round(_round: tuple) -> int:
+    elve = _round[0]
+    you  = _round[1]
+    
+    score = 0
+    
+    loose_dic = {'A': 'C', 'B': 'A', 'C': 'B'}
+    win_dic   = {'A': 'B', 'B': 'C', 'C': 'A'}
+    choice_values = {'A': 1, 'B': 2, 'C': 3}
+    
+    if you == 'X':
+        score += 0
+        you = loose_dic[elve]
+    elif you == 'Y':
+        score += 3
+        you = elve
+    elif you == 'Z':
+        score += 6
+        you = win_dic[elve]
+    
+    score += choice_values[you]
+    
+    return score
+
+class play_rps():
+    def __init__(self, path: str) -> list:
+        game_strategy = []
+        with open(path) as f:
+          for line in f.readlines():
+              game_strategy.append(parse_line(line))
+        self.game_strategy = game_strategy
+        
+    def score_game(self) -> int:
+        score_list = [score_round(_round) for _round in self.game_strategy]
+        return sum(score_list)
+    
+    def score_plays(self) -> int:
+        score_list = [play_round(_round) for _round in self.game_strategy]
+        return sum(score_list)
 #%%
+
+    
+    
+    
 
     
