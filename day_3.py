@@ -16,6 +16,7 @@ def char_to_int(char: str) -> int:
         return (ord(char) - 96)
 #%%
 from dataclasses import dataclass, field
+from typing import Generator
 
 @dataclass(order=False)
 class Rucksack():
@@ -46,7 +47,7 @@ class AllRuckSacks():
               content_list.append(line.strip())
         self.content_list = content_list
         
-    def split_into_groups(self, to_split: list, groupsize: int) -> list:
+    def split_into_groups(self, to_split: list, groupsize: int) -> Generator:
         for chunk in range(0, len(to_split), groupsize):
             yield to_split[chunk:chunk + groupsize]
     
