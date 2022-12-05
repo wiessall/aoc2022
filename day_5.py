@@ -5,25 +5,7 @@ Created on Mon Dec  5 08:48:52 2022
 
 @author: tristan
 """
-path =  '/home/tristan/01_Coding_Club/advent_of_code/2022/test_5.csv'
-a = []
 
-for line in open(path):
-    elements = line.split(' ')
-    positions = np.where(regex==elements)
-    letters = regex(line)
-    container_dic[positions[i]].append(letters[i])
-    
-    if line.split(" ")[0] == "move":
-         re.findall(r"[0-9]+", line)
-            
-        # print(re.findall(r"[A-Z]", line))
-#%%
-containers = a[:3]
-
-for line in containers[0]:
-    for char in line:
-        print(char)
 #%%
 
 from collections import defaultdict, OrderedDict
