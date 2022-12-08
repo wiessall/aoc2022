@@ -32,14 +32,14 @@ class Container():
         self.container_dic = dict(zip(keys, list(container_dic.values())))
         self.instruction_list = instruction_list
         
-    def move_containers(self) -> str:
+    def move_containers(self) -> None:
         for instruction in self.instruction_list:
             amount, origin, target = map(int, instruction)
             for i in range(1, amount + 1):
                 self.container_dic[target].append(self.container_dic[origin].pop(-1))
         self.top_row = ''.join([column[-1] for column in self.container_dic.values()])
     
-    def move_containers_9001(self) -> str:
+    def move_containers_9001(self) -> None:
         for instruction in self.instruction_list:
             amount, origin, target = map(int, instruction)
             print(self.container_dic)
