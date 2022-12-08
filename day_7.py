@@ -83,14 +83,19 @@ def stitch(top_level, all_f, keys):
 a = all_folders
 tks = a.keys()
 a
-for key in tks:
-    if key in all_folders.keys():
-        print(f"stepping into {key}")
-        if (tlfs := set(a[key].keys()).intersection(tks)):
-            if 'e' in tlfs:
-                print('aha')
-            for tlf in tlfs:
-                a[key][tlf]  = a.pop(tlf)
+def stitch(tks, a):
+    for key in tks:
+        if key in a.keys():
+            if (tlfs := set(a[key].keys()).intersection(tks)):
+                print(f"stepping into {key}")
+    
+                for tlf in tlfs:
+                    a[key][tlf]  = a.pop(tlf)
+                    a['/']
+                    print('')
+                if a[key].is_folder:
+                    stitch(a[key].keys(), a[key])
+    return a
 a            
 #%%
 def get_size(a):
