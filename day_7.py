@@ -23,7 +23,8 @@ class Folder(collections.defaultdict):
         self.name = name
         super(Folder, self).__init__(list) 
     def get_size(self) -> None:
-        self.size = sum([item.size if not item.is_folder else item.get_size for item in self.values()])
+        self.sizes = [int(item.size) if not item.is_folder else item.get_size() for item in self.values()]
+        # self.size = sum()
     def get_children(self) -> None:
         self.children = [item.name if not item.is_folder else (item.name, item.get_children) for item in self.values()] 
 #%%
@@ -72,11 +73,32 @@ all_folders
 # all_folders.get_size()
 #%%
 def stitch(top_level, all_f, keys): 
-    keys_b = keys
-    key = keys[0]                 
+    keys_b = top_level.keys() = keys[0]                 
     if isinstance(all_f[key], Folder):
         keys.remove(key)
         stitch(top_level, all_f[key], keys)
     else:
         all_f[keys] = top_level[key]
-        
+#%%        
+a = all_folders
+tks = a.keys()
+a
+for key in tks:
+    if key in all_folders.keys():
+        print(f"stepping into {key}")
+        if (tlfs := set(a[key].keys()).intersection(tks)):
+            if 'e' in tlfs:
+                print('aha')
+            for tlf in tlfs:
+                a[key][tlf]  = a.pop(tlf)
+a            
+#%%
+def get_size(a):
+    c = []
+    for item in a.values():
+        if item.is_folder == False:
+            c.append(item.size)
+        else:
+            get_size(item)
+    return(sum(c))
+get_size(a)
